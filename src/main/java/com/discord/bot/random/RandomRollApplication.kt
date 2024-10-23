@@ -1,11 +1,12 @@
-package com.discord.bot.random;
+package com.discord.bot.random
 
+import org.springframework.boot.WebApplicationType
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.boot.builder.SpringApplicationBuilder
 
 @SpringBootApplication
 class RandomRollApplication
 
 fun main(args: Array<String>) {
-	runApplication<RandomRollApplication>(*args)
+	SpringApplicationBuilder(RandomRollApplication::class.java).web(WebApplicationType.NONE).run(*args)
 }
