@@ -15,6 +15,8 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.springframework.stereotype.Service;
 
+import com.discord.bot.random.common.CommandEnum;
+
 @Service
 public class DiscordBotService extends ListenerAdapter {
 
@@ -27,7 +29,7 @@ public class DiscordBotService extends ListenerAdapter {
    */
   public void setCommand(JDA jda) {
 
-    SlashCommandData testCommand = Commands.slash("シャッフル", "ロールをランダムで決めるやつ")
+    SlashCommandData testCommand = Commands.slash(CommandEnum.SUFFLE.getCommand(), "ロールをランダムで決めるやつ")
         .addOption(OptionType.STRING, "member1", "参加メンバー1")
         .addOption(OptionType.STRING, "member2", "参加メンバー2")
         .addOption(OptionType.STRING, "member3", "参加メンバー3")
