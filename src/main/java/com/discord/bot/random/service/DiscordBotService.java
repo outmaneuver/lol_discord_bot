@@ -42,7 +42,7 @@ public class DiscordBotService extends ListenerAdapter {
   @Override
   public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
     String command = event.getName();
-    if (command.equals("シャッフル")) {
+    if (command.equals(CommandEnum.SUFFLE.getCommand())) {
       List<String> members = event.getOptions().stream().map(OptionMapping::getAsString).toList();
 
       var memberRollList = new ArrayList<>(members);
