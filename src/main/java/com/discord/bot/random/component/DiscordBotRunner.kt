@@ -28,4 +28,8 @@ class DiscordBotRunner(
         jda.awaitReady()
         discordBotService.setCommand(jda)
     }
+
+    fun linkDiscordAccountWithRiotId(discordId: String, discordServer: String, gameName: String, tagLine: String) {
+        discordBotService.linkDiscordAccountWithRiotId(discordId, discordServer, gameName, tagLine)
+    }
 }

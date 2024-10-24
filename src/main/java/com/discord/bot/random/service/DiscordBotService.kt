@@ -9,9 +9,13 @@ import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
 import org.springframework.stereotype.Service
+import org.springframework.beans.factory.annotation.Autowired
 
 @Service
-class DiscordBotService : ListenerAdapter() {
+class DiscordBotService @Autowired constructor(
+    private val riotApiService: RiotApiService,
+    private val userService: UserService
+) : ListenerAdapter() {
 
     companion object {
         private const val ROLL_MESSAGE = "top: {0}\njg: {1}\nmid: {2}\nadc: {3}\nsup: {4}"
@@ -50,5 +54,12 @@ class DiscordBotService : ListenerAdapter() {
             event.reply(result).setEphemeral(false).queue()
         }
     }
-}
 
+    fun linkDiscordAccountWithRiotId(discordId: String, discordServer: String, gameName: String, tagLine: String) {
+        val puuid = riotApiService.getPuuidByRiotId(gameName, tagLine)
+        val accountId = puuid?.let { riotApiService.getAccountIdByPuuid(it) }
+        if (puuid != null && accountId != null) {
+            userService.saveUser(discordId, discordServer, puuid, accountId)
+        }
+    }
+}
